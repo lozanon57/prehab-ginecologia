@@ -151,11 +151,11 @@ function TabAntes({ c }: { c: Cirugia }) {
   }
   return (
     <div className="space-y-4">
-      <Link to="/preparacion" className="pressable flex items-center gap-4 rounded-[22px] p-5 no-underline" style={{ background: 'var(--color-plum)', color: '#fff' }}>
+      <Link to="/plan" className="pressable flex items-center gap-4 rounded-[22px] p-5 no-underline" style={{ background: 'var(--color-plum)', color: '#fff' }}>
         <Sparkles size={28} aria-hidden />
         <span className="flex-1">
-          <span className="block text-[18px] font-bold">Tu programa de preparación ERAS</span>
-          <span className="block text-[14px] opacity-85">Ejercicio, nutrición, anemia, tabaco y ayuno: semana a semana, con checklist.</span>
+          <span className="block text-[18px] font-bold">Tu plan de prehabilitación</span>
+          <span className="block text-[14px] opacity-85">4 semanas de ejercicio, nutrición y mindfulness adaptadas a tu nivel, más el checklist ERAS.</span>
         </span>
         <ArrowRight size={20} aria-hidden />
       </Link>

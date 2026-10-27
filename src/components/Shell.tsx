@@ -6,7 +6,7 @@ import { CONFIG } from '../config'
 const NAV = [
   { to: '/', label: 'Inicio', icon: House, end: true },
   { to: '/cirugias', label: 'Cirugías', icon: Stethoscope, end: false },
-  { to: '/preparacion', label: 'Preparación', icon: CalendarCheck, end: false },
+  { to: '/plan', label: 'Mi plan', icon: CalendarCheck, end: false },
   { to: '/ejercicios', label: 'Ejercicios', icon: Dumbbell, end: false },
   { to: '/alarma', label: 'Alarma', icon: Siren, end: false },
 ]

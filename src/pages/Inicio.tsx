@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, CalendarCheck, HeartPulse, Siren, Dumbbell, Sparkles, RotateCcw } from 'lucide-react'
+import { ArrowRight, CalendarCheck, HeartPulse, Siren, Dumbbell, Sparkles, RotateCcw, Brain, Salad } from 'lucide-react'
 import { useApp } from '../store'
 import { getCirugia, hitoActual } from '../data/cirugias'
 import { GRUPOS, getGrupo } from '../data/grupos'
 import { ETAPAS_PREP } from '../data/preparacion'
 import { diaRelativo, etiquetaDia, formatoFecha } from '../lib/fechas'
+import { NIVELES, semanaPorFecha } from '../data/prehab/valoracion'
 import { IconBadge, ProgressRing, Disclaimer } from '../components/ui'
 import { ProgramaTag } from '../components/cirugia'
 import { DateSetter } from '../components/fechas'
@@ -73,7 +74,7 @@ function Bienvenida() {
           <IconBadge icon={Sparkles} color="var(--color-plum)" bg="var(--color-plum-soft)" size={38} />
           <p className="mt-3 font-bold">Programa ERAS</p>
           <p className="text-[14px]" style={{ color: 'var(--color-ink-2)' }}>
-            Para cirugía mayor: histerectomía, cáncer ginecológico, mama, miomas y endometriosis. Incluye preparación previa.
+            Para cirugía mayor: histerectomía, cáncer ginecológico, mama, miomas y endometriosis. Incluye un plan de 4 semanas de ejercicio, nutrición y mindfulness.
           </p>
         </div>
         <div className="card p-4">
@@ -116,6 +117,7 @@ function MiCirugia({ c }: { c: Cirugia }) {
         )}
       </div>
 
+      {(dia == null || dia < 0) && c.programa === 'eras' && <PlanCard diasFaltan={dia == null ? null : -dia} />}
       {dia != null && dia < 0 && c.programa === 'eras' && <HoyPreparacion dias={-dia} hechos={hechos} />}
       {dia != null && dia < 0 && c.programa === 'postop' && (
         <HoyCard titulo="Antes de tu cirugía" texto="Revisa las indicaciones de ayuno y lo que debes llevar. Ven acompañada: no podrás conducir de vuelta." to={`/cirugia/${c.id}`} cta="Ver indicaciones" />
@@ -124,10 +126,30 @@ function MiCirugia({ c }: { c: Cirugia }) {
 
       <div className="grid grid-cols-3 gap-2.5">
         <QuickLink to={`/cirugia/${c.id}`} icon={HeartPulse} label="Mi guía" />
-        <QuickLink to={c.programa === 'eras' ? '/preparacion' : `/cirugia/${c.id}`} icon={CalendarCheck} label="Preparación" />
+        <QuickLink to="/plan" icon={CalendarCheck} label="Mi plan" />
         <QuickLink to={`/ejercicios${c.ejercicios?.length ? `?p=${c.ejercicios[c.ejercicios.length - 1]}` : ''}`} icon={Dumbbell} label="Ejercicios" />
       </div>
     </section>
+  )
+}
+
+function PlanCard({ diasFaltan }: { diasFaltan: number | null }) {
+  const { nivel } = useApp()
+  const semana = semanaPorFecha(diasFaltan)
+  return (
+    <Link to="/plan" className="pressable block rounded-[22px] p-5 no-underline" style={{ background: 'var(--color-plum)', color: '#fff' }}>
+      <span className="eyebrow block" style={{ color: 'var(--color-blush)' }}>
+        Prehabilitación · {nivel ? `semana ${semana} de 4` : '4 semanas'}
+      </span>
+      <span className="font-display mt-1 block text-[28px] leading-tight">
+        {nivel ? `Tu plan · ${NIVELES[nivel].nombre}` : 'Crea tu plan personalizado'}
+      </span>
+      <span className="mt-3 flex gap-2">
+        {[{ i: Dumbbell, t: 'Ejercicio' }, { i: Salad, t: 'Nutrición' }, { i: Brain, t: 'Mente' }].map(({ i: Icon, t }) => (
+          <span key={t} className="chip" style={{ background: 'rgba(255,255,255,.15)', color: '#fff' }}><Icon size={14} aria-hidden />{t}</span>
+        ))}
+      </span>
+    </Link>
   )
 }
 
@@ -136,7 +158,7 @@ function HoyPreparacion({ dias, hechos }: { dias: number; hechos: Record<string,
   const total = ETAPAS_PREP.flatMap((e) => e.tareas)
   const completas = total.filter((t) => hechos[`prep:${t.id}`]).length
   return (
-    <Link to="/preparacion" className="card pressable flex items-center gap-4 p-5 no-underline" style={{ color: 'var(--color-ink)' }}>
+    <Link to="/plan?tab=checklist" className="card pressable flex items-center gap-4 p-5 no-underline" style={{ color: 'var(--color-ink)' }}>
       <ProgressRing value={completas / total.length} label={`${completas} de ${total.length} tareas completadas`} />
       <span className="flex-1">
         <span className="eyebrow block" style={{ color: 'var(--color-plum)' }}>Ahora toca · {etapa.cuando}</span>

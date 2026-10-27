@@ -1,10 +1,11 @@
 import { ETAPAS_PREP, PRINCIPIOS_ERAS } from '../data/preparacion'
 import { useApp } from '../store'
-import { CheckRow, ProgressRing, Disclaimer } from '../components/ui'
+import { CheckRow, ProgressRing } from '../components/ui'
 import { FastingCalculator } from '../components/fechas'
 import { diaRelativo } from '../lib/fechas'
 
-export function Preparacion() {
+/** Checklist ERAS por etapas, mostrado como pestaña de Mi plan. */
+export function ChecklistEras() {
   const { hechos, toggle, fechaCirugia } = useApp()
   const todas = ETAPAS_PREP.flatMap((e) => e.tareas)
   const completas = todas.filter((t) => hechos[`prep:${t.id}`]).length
@@ -14,7 +15,7 @@ export function Preparacion() {
     <div className="fade-in space-y-7">
       <header>
         <p className="eyebrow" style={{ color: 'var(--color-plum)' }}>Programa ERAS</p>
-        <h1 className="font-display text-[40px] leading-tight">Prepárate para tu cirugía</h1>
+        <h2 className="font-display text-[32px] leading-tight">Checklist de preparación</h2>
         <p className="mt-2 text-[15px]" style={{ color: 'var(--color-ink-2)' }}>
           ERAS (recuperación intensificada) es un conjunto de medidas, avaladas por la evidencia, que reducen complicaciones y
           acortan la recuperación. Tú eres parte activa del equipo.
@@ -58,7 +59,6 @@ export function Preparacion() {
         )
       })}
 
-      <Disclaimer />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { Shell } from './components/Shell'
 import { Inicio } from './pages/Inicio'
 import { Cirugias } from './pages/Cirugias'
 import { CirugiaDetalle } from './pages/CirugiaDetalle'
-import { Preparacion } from './pages/Preparacion'
+import { MiPlan } from './pages/plan/MiPlan'
 import { Ejercicios } from './pages/Ejercicios'
 import { Alarma } from './pages/Alarma'
 import { Informacion } from './pages/Informacion'
@@ -16,7 +16,8 @@ export default function App() {
           <Route index element={<Inicio />} />
           <Route path="cirugias" element={<Cirugias />} />
           <Route path="cirugia/:id" element={<CirugiaDetalle />} />
-          <Route path="preparacion" element={<Preparacion />} />
+          <Route path="plan" element={<MiPlan />} />
+          <Route path="preparacion" element={<Navigate to="/plan?tab=checklist" replace />} />
           <Route path="ejercicios" element={<Ejercicios />} />
           <Route path="alarma" element={<Alarma />} />
           <Route path="informacion" element={<Informacion />} />
