@@ -2,6 +2,7 @@ import { BookOpen, ExternalLink, ShieldCheck, Lock } from 'lucide-react'
 import { REFERENCIAS } from '../data/referencias'
 import { CONFIG } from '../config'
 import { IconBadge } from '../components/ui'
+import { AutorCard } from '../components/Autor'
 
 const FAQ = [
   { p: '¿Qué es ERAS?', r: 'Son las siglas en inglés de "recuperación intensificada tras la cirugía": un conjunto de medidas antes, durante y después de la operación que, aplicadas juntas, reducen complicaciones, dolor y días de ingreso.' },
@@ -43,6 +44,8 @@ export function Informacion() {
           </p>
         </div>
       </section>
+
+      <AutorCard />
 
       <section>
         <h2 className="font-display mb-3 flex items-center gap-2 text-[28px]"><BookOpen size={22} aria-hidden /> Fuentes</h2>

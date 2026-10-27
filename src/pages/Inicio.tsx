@@ -9,6 +9,7 @@ import { NIVELES, semanaPorFecha } from '../data/prehab/valoracion'
 import { IconBadge, ProgressRing, Disclaimer } from '../components/ui'
 import { ProgramaTag } from '../components/cirugia'
 import { DateSetter } from '../components/fechas'
+import { AutorPie } from '../components/Autor'
 import type { Cirugia } from '../types'
 
 export function Inicio() {
@@ -52,6 +53,7 @@ export function Inicio() {
       </Link>
 
       <Disclaimer />
+      <AutorPie />
     </div>
   )
 }
