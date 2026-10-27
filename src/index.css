@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Fondos cálidos */
+  --color-bg:        #FAF6F3;
+  --color-surface:   #FFFFFF;
+  --color-surface-2: #F3ECE8;
+
+  /* Marca: ciruela / malva */
+  --color-plum:       #6B2D5C;
+  --color-plum-deep:  #3E1A36;
+  --color-plum-soft:  #F4E8EF;
+  --color-blush:      #F6D9E6;
+
+  /* Acentos por programa */
+  --color-sage:       #4F7D68;
+  --color-sage-bg:    #E8F1EC;
+  --color-clay:       #B8613F;
+  --color-clay-bg:    #FBEDE6;
+  --color-lilac:      #6E5FAE;
+  --color-lilac-bg:   #EEECF8;
+  --color-sky:        #3C6E91;
+  --color-sky-bg:     #E7F0F6;
+
+  /* Semáforo clínico */
+  --color-alert:      #B42318;
+  --color-alert-bg:   #FEF0EE;
+  --color-warn:       #A15C07;
+  --color-warn-bg:    #FEF5E6;
+  --color-ok:         #2F7A55;
+  --color-ok-bg:      #E9F6EF;
+
+  --color-ink:        #22161F;
+  --color-ink-2:      #5E5260;
+  --color-ink-3:      #958A93;
+  --color-line:       #EBE3DF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { min-height: 100dvh; }
+
+.font-display { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; }
+
+/* Superficies */
+.card {
+  background: var(--color-surface);
+  border-radius: 22px;
+  border: 1px solid var(--color-line);
+}
+.card-soft { border-radius: 22px; }
+
+.pressable { transition: transform 160ms ease, box-shadow 160ms ease; }
+.pressable:active { transform: scale(0.98); }
+@media (hover: hover) {
+  .pressable:hover { box-shadow: 0 10px 30px -18px rgba(62, 26, 54, 0.45); }
+}
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.scroll-x { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.scroll-x::-webkit-scrollbar { display: none; }
+
+.hero-grad {
+  background:
+    radial-gradient(120% 80% at 100% 0%, #F6D9E6 0%, rgba(246,217,230,0) 55%),
+    radial-gradient(90% 70% at 0% 100%, #E8F1EC 0%, rgba(232,241,236,0) 60%),
+    var(--color-bg);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: saturate(160%) blur(20px);
+  -webkit-backdrop-filter: saturate(160%) blur(20px);
+}
+
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+:focus-visible { outline: 3px solid var(--color-lilac); outline-offset: 2px; border-radius: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+.fade-in { animation: fadeIn 260ms ease both; }
+@keyframes fadeIn { from { transform: translateY(6px); } to { transform: none; } }
